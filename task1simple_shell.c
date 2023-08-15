@@ -32,31 +32,31 @@ int main ()
 		show_prompt();
 		if (fgets(input, sizeof(input), stdin) == NULL)
 		{
-		break;
+			break;
 		}
-	input[strcspn(input, "\n")] = '\0';
-	if (strcmp(input, "terminate shell") == 0)
-	{
-		break;
-	}
+		input[strcspn(input, "\n")] = '\0';
+		if (strcmp(input, "terminate shell") == 0)
+		{
+			break;
+		}
 
-	pid = fork();
+		pid = fork();
 
-	if (pid == -1)
-	{
-		perror("Child process creation failed");
-	}
-	else if (pid == 0)
-	{
-		char *args[] = {input, NULL};
-		execve(input, args, NULL);
-		perror("Execution failed");
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-	}
+		if (pid == -1)
+		{
+			perror("Child process creation failed");
+		}
+		else if (pid == 0)
+		{
+			char *args[] = {input, NULL};
+			execve(input, args, NULL);
+			perror("Execution failed");
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			waitpid(pid, NULL, 0);
+		}
 	}
 
 	printf("\n");
