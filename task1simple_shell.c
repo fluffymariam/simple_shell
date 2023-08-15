@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define USER_INPUT 50
+#define USER_INPUT 60
 
 /**
  *
