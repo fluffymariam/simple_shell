@@ -8,24 +8,25 @@
 #define USER_INPUT 60
 
 /**
- *
- *
- *
- *
- *
+ * show_prompt - Function to display initial prompt
  */
 
-void show_prompt()
+void show_prompt(void)
 {
 	printf("enteryourcommand%% ");
 	fflush(stdout);
 }
-
-int main ()
+/**
+ * main - Entry point.
+ * @argc: number of args
+ * @argv: arg vector
+ * Return: Success
+ */
+int main(int argc, char *argv[])
 {
 	char input[USER_INPUT];
 	char *args[USER_INPUT];
-	pid_t pid;
+	pid_t pid = argc;
 
 	while (1)
 	{
@@ -35,7 +36,7 @@ int main ()
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
-		if (strcmp(input, "terminate shell") == 0)
+		if (strcmp(input, "exit") == 0)
 		{
 			break;
 		}
@@ -48,9 +49,11 @@ int main ()
 		}
 		else if (pid == 0)
 		{
-			char *args[] = {input, NULL};
+			args[0] = input;
+			args[1] = NULL;
+
 			execve(input, args, NULL);
-			perror("Execution failed");
+			perror(argv[0]);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -59,6 +62,5 @@ int main ()
 		}
 	}
 
-	printf("\n");
-	return 0;
+	return (0);
 }
