@@ -50,7 +50,7 @@ int main(int argc, char *argv[], char **env)
 	{
 
 		show_prompt();
-		path = _getenv(env,"PATH");
+		path = _getenv(env, "PATH");
 		if (getline(&input, &n, stdin) == -1)
 		{
 			break;
