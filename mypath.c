@@ -15,9 +15,9 @@ char *_getenv(char **env, char *var)
 
 	for (i = 0; env[i] != NULL; i++)
 	{
-		env_cpy = strdup(env[i]);
+		env_cpy = _strdup(env[i]);
 		arg = tokenize(&env_cpy, "=");
-		if (strcmp(arg[0], var) == 0)
+		if (_strcmp(arg[0], var) == 0)
 			str = arg[1];
 	}
 	return (str);
@@ -33,24 +33,22 @@ void check_prog(char **pathv, char *progname, char **result)
 	int i = 0;
 
 	if (access(progname, X_OK) == 0)
-		*result = strdup(progname);
+		*result = _strdup(progname);
 	else
 	{
 		for (i = 0; pathv[i] != NULL; i++)
 		{
 			char *test = NULL;
 
-			test = strdup(pathv[i]);
+			test = _strdup(pathv[i]);
 			strcat(test, "/");
 			strcat(test, progname);
 
 			if (access(test, X_OK) == 0)
 			{
-				*result = strdup(test);
+				*result = _strdup(test);
 				break;
 			}
 		}
 	}
 }
-
-
