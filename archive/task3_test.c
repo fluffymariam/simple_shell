@@ -10,6 +10,7 @@
 /**
  * print_str - Function to print strings
  * @str: string o be printed
+ * @end: terminator
  */
 void print_str(char *str, char end)
 {
@@ -67,18 +68,21 @@ char **tokenize(char **str, char *delim)
 	return (args);
 }
 
+
 /**
  * main - Entry point.
  * @argc: number of args
  * @argv: arg vector
+ * @env: environment
  * Return: Success
  */
 int main(int argc, char *argv[], char **env)
 {
 	char *input = NULL;
-	char **args = NULL, **env1 = NULL;
-	size_t n = 0;
+	char **args = NULL;
+	size_t n = 0, i = 0;
 	pid_t pid = argc;
+
 
 	while (1)
 	{
@@ -90,33 +94,33 @@ int main(int argc, char *argv[], char **env)
 		input[strcspn(input, "\n")] = '\0';
 		if (strcmp(input, "exit") == 0)
 		{
-			break;
+			exit(44);
 		}
 		if (strcmp(input, "env") == 0)
 		{
-			for (env1 = env; *env1 != NULL; env1++)
+			for (i = 0; env[i] != NULL; i++)
 			{
-				print_str(*env1, '\n');
+				print_str(env[i], '\n');
 			}
-			break;
-		}
-
-		args = tokenize(&input, " \n");
-		pid = fork();
-		if (pid == -1)
-		{
-			perror("Child process creation failed");
-		}
-		else if (pid == 0)
-		{
-
-			execve(input, args, NULL);
-			perror(argv[0]);
-			exit(EXIT_FAILURE);
 		}
 		else
 		{
-			waitpid(pid, NULL, 0);
+			args = tokenize(&input, " \n");
+			pid = fork();
+			if (pid == -1)
+			{
+				perror("Child process creation failed");
+			}
+			else if (pid == 0)
+			{
+				execve(input, args, NULL);
+				perror(argv[0]);
+				exit(EXIT_FAILURE);
+			}
+			else
+			{
+				waitpid(pid, NULL, 0);
+			}
 		}
 	}
 
