@@ -11,7 +11,7 @@ char **tokenize(char **str, char *delim)
 	char *str_cpy, *token, **args;
 	int n = 0, i = 0;
 
-	str_cpy = strdup(*str);
+	str_cpy = _strdup(*str);
 	token = strtok(str_cpy, delim);
 	n++;
 	while (token)
@@ -78,9 +78,9 @@ int main(int argc, char *argv[], char **env)
 		if (getline(&input, &n, stdin) == -1)
 			break;
 		input[strcspn(input, "\n")] = '\0';
-		if (strcmp(input, "exit") == 0)
+		if (_strcmp(input, "exit") == 0)
 			exit(44);
-		if (strcmp(input, "env") == 0)
+		if (_strcmp(input, "env") == 0)
 		{
 			for (i = 0; env[i] != NULL; i++)
 				print_str(env[i], '\n');
@@ -96,7 +96,7 @@ int main(int argc, char *argv[], char **env)
 				perror("Command Not Found");
 			else
 			{
-				args[0] = strdup(test);
+				args[0] = _strdup(test);
 				if (test == NULL)
 					perror("file does not existi");
 				else

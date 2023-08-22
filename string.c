@@ -35,3 +35,30 @@ char *_strdup(char *str)
 
 	return (str_cpy);
 }
+
+/**
+ * _strcmp - this function compares equal strings
+ * @s1: first string to be compared
+ * @s2: second string to be compared
+ * Return: 0 when success
+ */
+
+int _strcmp(char *s1, char *s2)
+{
+	int len1 = 0, len2 = 0, m = 0, result = 0;
+
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+
+	if (len1 != len2)
+		result = -1;
+	else
+	{
+		for (m = 0; m < len1; m++)
+		{
+			if (s1[m] != s2[m])
+				result = -1;
+		}
+	}
+	return (result);
+}
