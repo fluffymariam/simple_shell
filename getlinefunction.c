@@ -39,3 +39,19 @@ char *getlinefunc()
 
 	return (linebuf);
 }
+
+/**
+ * free_args - to free allocated memory
+ * @args: character 
+ *
+ */
+
+void free_args(char **args)
+{
+	int m;
+	for (m = 0; args[m] != NULL; m++)
+		{
+			free(args[m]);
+		}
+		free(args);
+}
