@@ -4,7 +4,7 @@
  */
 void show_prompt(void)
 {
-	print_str("enteryourcommand% ", '\0');
+	print_str("$ ", '\0');
 	fflush(stdout);
 }
 
@@ -24,5 +24,6 @@ void print_str(char *str, char end)
 		write(1, &c, 1);
 		i++;
 	}
-	write(1, &end, 1);
+	if (end != '\0')
+		write(1, &end, 1);
 }
