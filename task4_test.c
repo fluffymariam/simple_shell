@@ -78,8 +78,8 @@ int main(int argc, char *argv[], char **env)
 		if (getline(&input, &n, stdin) == -1)
 			break;
 		input[strcspn(input, "\n")] = '\0';
-		if (_strcmp(input, "exit") == 0)
-			exit(44);
+		/*if (_strcmp(input, "exit") == 0)
+			exit(EXIT_FAILURE);*/
 		if (_strcmp(input, "env") == 0)
 		{
 			for (i = 0; env[i] != NULL; i++)
