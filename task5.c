@@ -68,14 +68,13 @@ int main(int argc, char *argv[], char **env)
 {
 	char *input = NULL, *path = NULL;
 	char **args = NULL, **pathv = NULL;
-	size_t i = argc;
+	size_t n = 0, i = argc;
 
 	while (1)
 	{
 		show_prompt();
 		path = _getenv(env, "PATH");
-		input = getlinefunc();
-		if (input == NULL)
+		if (getlinefunc(&input, &n, stdin) == NULL)
 			break;
 		input[strcspn(input, "\n")] = '\0';
 		if (_strcmp(input, "exit") == 0)
@@ -98,17 +97,11 @@ int main(int argc, char *argv[], char **env)
 			{
 				args[0] = _strdup(test);
 				if (test == NULL)
-					perror("file does not exist");
+					perror("file does not existi");
 				else
 					runexec(args, env, argv[0]);
 			}
 		}
-		/**
-		 *
-		 * free(input);
-		 * free_args(args);
-		 * free_args(pathv);
-		*/
 	}
 	return (0);
 }
