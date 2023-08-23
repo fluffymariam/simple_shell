@@ -72,7 +72,6 @@ int main(int argc, char *argv[], char **env)
 
 	while (1)
 	{
-
 		show_prompt();
 		path = _getenv(env, "PATH");
 		if (getline(&input, &n, stdin) == -1)
