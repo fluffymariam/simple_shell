@@ -4,7 +4,7 @@
  */
 void show_prompt(void)
 {
-	print_str("enteryourcommand% ", '\0');
+	print_str("$ ", '\0');
 	fflush(stdout);
 }
 

@@ -93,7 +93,7 @@ int main(int argc, char *argv[], char **env)
 			pathv = tokenize(&path, ":");
 			check_prog(pathv, args[0], &test);
 			if (test == NULL)
-				perror("Command Not Found");
+				perror(argv[0]);
 			else
 			{
 				args[0] = _strdup(test);
