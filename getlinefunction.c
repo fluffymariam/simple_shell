@@ -5,15 +5,14 @@
  * Return: linebuf
  */
 
-char *getlinefunc()
+size_t getlinefunc(char **linebuf, size_t *start)
 {
 	int m;
-	int start = 0;
-	int buf_size = 1;
+	size_t buf_size = 1;
 
-	char *linebuf = (char *)malloc(buf_size);
+	*linebuf = (char *)malloc(buf_size);
 
-	if (!linebuf)
+	if (!*linebuf)
 	{
 		perror("Memory allocation failed");
 		exit(EXIT_FAILURE);
@@ -21,21 +20,20 @@ char *getlinefunc()
 
 	while ((m = getchar()) != EOF && m != '\n')
 	{
-		linebuf[start] = m;
-		start++;
+		*linebuf[*start] = m;
+		*start += 1;
 
-		if (start >= buf_size)
+		if (*start >= buf_size)
 		{
 			buf_size *= 2;
-			linebuf = (char *)realloc(linebuf, buf_size);
-			if (!linebuf)
+			*linebuf = (char *)realloc(linebuf, buf_size);
+			if (!*linebuf)
 			{
 				perror("Memory allocarion failed");
 				exit(EXIT_FAILURE);
 			}
 		}
 	}
-	linebuf[start] = '\0';
-
-	return (linebuf);
+	*linebuf[*start] = '\0';
+	return (*start);
 }
