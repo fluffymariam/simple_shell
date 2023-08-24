@@ -17,6 +17,7 @@ void runexec(char **, char **, char *);
 int _strlen(char *);
 char *_strdup(char *);
 int _strcmp(char *, char *);
-size_t getlinefunc(char **, size_t *);
+char *getlinefunc();
+void free_args(char **);
 
 #endif

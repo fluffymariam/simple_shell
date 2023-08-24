@@ -37,3 +37,20 @@ size_t getlinefunc(char **linebuf, size_t *start)
 	*linebuf[*start] = '\0';
 	return (*start);
 }
+
+/**
+ * free_args - to free allocated memory
+ * @args: character
+ *
+ */
+
+void free_args(char **args)
+{
+	int m;
+
+	for (m = 0; args[m] != NULL; m++)
+	{
+		free(args[m]);
+	}
+		free(args);
+}
