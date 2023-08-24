@@ -68,11 +68,13 @@ int main(int argc, char *argv[], char **env)
 {
 	char *input = NULL, *path = NULL;
 	char **args = NULL, **pathv = NULL;
+	FILE *input_stream = stdin;
 	size_t n = 0, i = argc;
 
 	while (1)
 	{
-		show_prompt();
+		if (isatty(fileno(input_stream)))
+			show_prompt();
 		path = _getenv(env, "PATH");
 		if (getline(&input, &n, stdin) == -1)
 			break;

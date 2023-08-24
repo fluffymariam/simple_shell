@@ -68,13 +68,14 @@ int main(int argc, char *argv[], char **env)
 {
 	char *input = NULL, *path = NULL;
 	char **args = NULL, **pathv = NULL;
+
 	size_t n = 0, i = argc;
 
 	while (1)
 	{
 		show_prompt();
 		path = _getenv(env, "PATH");
-		if (getlinefunc(&input, &n, stdin) == NULL)
+		if (getline(&input, &n, stdin) == -1)
 			break;
 		input[strcspn(input, "\n")] = '\0';
 		if (_strcmp(input, "exit") == 0)

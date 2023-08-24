@@ -4,10 +4,7 @@
  */
 void show_prompt(void)
 {
-	pid_t pid = getpid();
-
 	print_str("$ ", '\0');
-	printf ("%d", pid);
 	fflush(stdout);
 }
 
