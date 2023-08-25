@@ -8,7 +8,7 @@ char *getlinefunc()
 {
 	int m;
 	int start = 0;
-	char *linebuf; 
+	char *linebuf;
 	int buf_size = 1;
 
 	linebuf = (char *)malloc(buf_size);
